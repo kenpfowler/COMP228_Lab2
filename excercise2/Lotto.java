@@ -1,5 +1,6 @@
 package excercise2;
 import java.util.Random;
+
 /*
 
 Exercise 2
@@ -18,24 +19,31 @@ Use methods of JOptionPane class to interact with the user. (3 marks)
 //create Lotto class
 public class Lotto {
 
+
 //initialize an array of to hold random integers
 private int[] _numbers = {0, 0, 0};
 
-//create constructor to populate objects _number field with random integers
-public Lotto()
-{
-    //create object to create random numbers
-    Random randomizer = new Random();
-    for (int number: this._numbers) {
-        //reassign each variable in _numbers array to random int between 1 & 9
-        number = randomizer.nextInt(8) + 1;
-    }
-}
-
-//create method to return array of random numbers
-public int[] Numbers()
+//create getter for numbers array
+public int[] getNumbers()
 {
     return _numbers;
 }
 
+//create constructor to populate objects _number field with random integers
+public Lotto()
+{
+    //create a random number generator
+    Random randomizer = new Random();
+    //assign new values to the numbers array
+    for (int i = 0; i < this._numbers.length; i++) {
+        this._numbers[i] = randomizer.nextInt(9) + 1;
+    }
 }
+
+//create method to return array of random numbers
+public int[] RandomNumbers()
+{
+    return getNumbers();
+}
+
+};
