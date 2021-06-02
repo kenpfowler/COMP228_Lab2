@@ -52,7 +52,11 @@ public class Question
     //array to store quiz answers
     private final String[] _answers =
             {
-              "A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes"
+                    "1A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes",
+                    "2A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes",
+                    "3A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes",
+                    "4A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes"
+
             };
 
     //store the feedback for correct and incorrect answers
@@ -60,7 +64,7 @@ public class Question
     private final String[] _isIncorrectMessage = {"Wrong. Please try again", "No. Keep trying..", "No. Another attempt"};
 
     //key to the correct answers
-    private final int[] _answerKey = {0};
+    private final int[] _answerKey = {0, 0, 0, 0};
 
     //store the number of correct answers
     private int _correctAnswers = 0;
@@ -106,13 +110,13 @@ public class Question
     }
 
     //method to display quiz questions to user
-    public void PrepareQuestion()
+    public String PrepareQuestion(int questionNumber)
     {
         //get the first question
-        String dialogue = getQuestions()[0];
+        String dialogue = getQuestions()[questionNumber];
 
         //get the answers
-        String[] answers = getAnswers()[0].split(",", 0);
+        String[] answers = getAnswers()[questionNumber].split(",", 0);
 
         //format each answer and add to the dialogue
         for (int i = 0; i < answers.length; i++)
@@ -124,7 +128,7 @@ public class Question
 
         dialogue += "\nPlease enter the number attached to your answer (1 - 5):";
 
-        setUserInput(Integer.parseInt(JOptionPane.showInputDialog(null, dialogue, "Java Quiz", JOptionPane.PLAIN_MESSAGE)));
+        return dialogue;
     }
 
     public void TestAnswer()
@@ -182,8 +186,8 @@ public class Question
     }
 
     //this method will be called in the driver class to initiate the quiz loop.  All other methods used within
-    public void GetAnswer()
+    public void GetAnswer(String dialogue)
     {
-
+        setUserInput(Integer.parseInt(JOptionPane.showInputDialog(null, dialogue, "Java Quiz", JOptionPane.PLAIN_MESSAGE)));
     }
 }
