@@ -51,7 +51,7 @@ public Lotto()
 }
 
 //find sum of numbers array
-    public  int SumOfLotto()
+    public  int sumOfLotto()
     {
         int sum = 0;
         //accumulate lotto numbers in variable
@@ -63,7 +63,7 @@ public Lotto()
         return sum;
     }
 //randomize lotto numbers
-public void Randomize()
+public void randomize()
 {
     //create a random number generator
     Random randomizer = new Random();
