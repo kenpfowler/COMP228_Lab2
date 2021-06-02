@@ -1,8 +1,11 @@
 package excercise1;
+import javax.swing.JOptionPane;
+import java.util.Scanner;
+
 /*
- Develop a Java application that simulates a test.
- The test contains at least four questions about first three lectures of this course.
- Each question should be a multiple-choice question with 5 options.
+- [] Develop a Java application that simulates a test.
+- [] The test contains at least four questions about first three lectures of this course.
+- [] Each question should be a multiple-choice question with 5 options.
 
  Define a Question class. Use programmer-defined methods to implement your solution. For example:
         define a method to prepare the questions – prepareQuestion
@@ -38,26 +41,100 @@ switch ( randomObject.nextInt( 3 ) )
 public class Question
 {
     //array to store quiz questions
-    private String[] _questions = {"What is a static method?", "", "", ""};
+    private final String[] _questions =
+            {
+                    "What is a static method?",
+                    "Classes should use the ___ casing convention",
+                    "What does the term JDK stand for?",
+                    "The %d symbol can be used in a variety of methods to interpolate a string"
+            };
+
+    //array to store quiz answers
+    private final String[] _answers =
+            {
+              "A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes"
+            };
+
+    //key to the correct answers
+    private final int[] _answerKey = {0};
+
+    //store the number of correct answers
     private int _correctAnswers = 0;
 
+    //store current user input
+    private int _userInput = 0;
+
+    // getter and setters
+    public String[] getQuestions()
+    {
+        return _questions;
+    }
+
+    public String[] getAnswers()
+    {
+        return _answers;
+    }
+
+    public int getUserInput()
+    {
+        return _userInput;
+    }
+    public void setUserInput(int value)
+    {
+        _userInput = value;
+    }
+    public int getCorrectAnswers()
+    {
+        return _correctAnswers;
+    }
+    public void setCorrectAnswers()
+    {
+        _correctAnswers++;
+    }
+
+    //Constructor
     public Question()
     {
 
     }
 
-    public String PrepareQuestion()
+    public void PrepareQuestion()
     {
-        return "";
-    }
-    public  void TestAnswer()
-    {
+        //get the first question
+        String dialogue = getQuestions()[0];
 
+        //get the answers
+        String[] answers = getAnswers()[0].split(",", 0);
+
+        //format each answer and add to the dialogue
+        for (int i = 0; i < answers.length; i++)
+        {
+           dialogue += String.format("\n %d. %s\n", (i + 1), answers[i]);
+        }
+
+        //ask user to enter a response
+
+        dialogue += "\nPlease enter the number attached to your answer (1 - 5):";
+
+        setUserInput(Integer.parseInt(JOptionPane.showInputDialog(null, dialogue, "Java Quiz", JOptionPane.PLAIN_MESSAGE)));
     }
+
+    public void TestAnswer()
+    {
+        //compare users answer with correct answer
+        if (this.getUserInput() == this._answerKey[0])
+        {
+            //increment score if the answer is correct
+            setCorrectAnswers();
+        }
+    }
+
     public void DisplayMessage()
     {
 
     }
+
+    //this method will be called in the driver class to initiate the quiz loop.  All other methods used within
     public void GetAnswer()
     {
 
