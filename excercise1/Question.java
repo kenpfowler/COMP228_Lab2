@@ -1,6 +1,6 @@
 package excercise1;
 import javax.swing.JOptionPane;
-import java.util.Scanner;
+import java.util.Random;
 
 /*
 - [] Develop a Java application that simulates a test.
@@ -33,8 +33,8 @@ switch ( randomObject.nextInt( 3 ) )
         }
         ```
 
-        At the end of the test, display the number of correct and incorrect answers, and the percentage of the correct answers.
-        Your main class will simply create a question object and start the test by calling getAnswer method. (5 marks)
+        - [] At the end of the test, display the number of correct and incorrect answers, and the percentage of the correct answers.
+        - [] Your main class will simply create a question object and start the test by calling getAnswer method. (5 marks)
 */
 
 
@@ -55,6 +55,10 @@ public class Question
               "A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes"
             };
 
+    //store the feedback for correct and incorrect answers
+    private final String[] _isCorrectMessage = {"Excellent!", "Keep up the good job!", "Well done!"};
+    private final String[] _isIncorrectMessage = {"Wrong. Please try again", "No. Keep trying..", "No. Another attempt"};
+
     //key to the correct answers
     private final int[] _answerKey = {0};
 
@@ -63,6 +67,9 @@ public class Question
 
     //store current user input
     private int _userInput = 0;
+
+    //store if user was correct for current round
+    private boolean _isCorrect = false;
 
     // getter and setters
     public String[] getQuestions()
@@ -98,6 +105,7 @@ public class Question
 
     }
 
+    //method to display quiz questions to user
     public void PrepareQuestion()
     {
         //get the first question
@@ -126,12 +134,51 @@ public class Question
         {
             //increment score if the answer is correct
             setCorrectAnswers();
+            this._isCorrect = true;
         }
     }
 
     public void DisplayMessage()
     {
+        Random randomizer = new Random();
 
+        switch (randomizer.nextInt(3))
+        {
+            case 0:
+                if (this._isCorrect)
+                {
+                   JOptionPane.showMessageDialog(null, _isCorrectMessage[0]);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, _isIncorrectMessage[0]);
+
+                }
+                break;
+            case 1:
+                if (this._isCorrect)
+                {
+                    JOptionPane.showMessageDialog(null, _isCorrectMessage[1]);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, _isIncorrectMessage[1]);
+
+                }
+                break;
+            case 2:
+                if (this._isCorrect)
+                {
+                    JOptionPane.showMessageDialog(null, _isCorrectMessage[2]);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, _isIncorrectMessage[2]);
+
+                }
+                break;
+        }
+        this._isCorrect = false;
     }
 
     //this method will be called in the driver class to initiate the quiz loop.  All other methods used within

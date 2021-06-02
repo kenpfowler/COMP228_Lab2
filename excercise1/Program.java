@@ -7,5 +7,6 @@ public class Program
         Question quiz = new Question();
         quiz.PrepareQuestion();
         quiz.TestAnswer();
+        quiz.DisplayMessage();
     }
 }
