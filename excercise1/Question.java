@@ -1,6 +1,8 @@
 package excercise1;
 import javax.swing.JOptionPane;
 import java.util.Random;
+/*ISSUES
+- [] show user a summary of their results
 
 /*
 - [] Develop a Java application that simulates a test.
@@ -14,7 +16,7 @@ import java.util.Random;
         define a method to interact with the user - getAnswer
         Display the questions using methods of JOptionPane class. Use a loop to show all the questions.
 
-        For each question:
+For each question:
 
         - [ ] If the user finds the right answer, display a random congratulatory message (“Excellent!”, ”Keep up the good job!”, or “Well done!”).
         - [ ] If the user responds incorrectly, display an appropriate message, and the correct answer (“Wrong. Please try again”, “No. Keep trying..”, "No. Another attempt).
@@ -46,17 +48,16 @@ public class Question
                     "What is a static method?",
                     "Classes should use the ___ casing convention",
                     "What does the term JDK stand for?",
-                    "The %d symbol can be used in a variety of methods to interpolate a string"
+                    "What is a package in Java"
             };
 
     //array to store quiz answers
     private final String[] _answers =
             {
-                    "1A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes",
-                    "2A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes",
-                    "3A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes",
-                    "4A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes"
-
+                    "A method that can be used without creating an instance of its class,A method that leaves the program in a static state,A method that can only be used by first instantiating an object of the methods class,A method that is derived from the 'Static' class,A method that never changes",
+                    "What convention? There is no convention for classes,classes should use camelCase,classes should use PascalCase,They should be kebab-case. Mmmhhh kebab-case,They should be SNAKE_UPPERCASE",
+                    "Java Deployment Kit,Java Development Kit,Java Debugging Kit,JavaScript Development Kit,Java Demolition Kit",
+                    "A package is a place to store data that wont be used,Packages are for data that will be sent to the client,Packages are only used by Amazon,Packages are like a namespace; they group together a set of classes,Packages are only for third-party libraries"
             };
 
     //store the feedback for correct and incorrect answers
@@ -64,7 +65,7 @@ public class Question
     private final String[] _isIncorrectMessage = {"Wrong. Please try again", "No. Keep trying..", "No. Another attempt"};
 
     //key to the correct answers
-    private final int[] _answerKey = {0, 0, 0, 0};
+    private final int[] _answerKey = {1, 3, 2, 4};
 
     //store the number of correct answers
     private int _correctAnswers = 0;
@@ -131,10 +132,10 @@ public class Question
         return dialogue;
     }
 
-    public void TestAnswer()
+    public void TestAnswer(int questionNumber)
     {
         //compare users answer with correct answer
-        if (this.getUserInput() == this._answerKey[0])
+        if (this.getUserInput() == this._answerKey[questionNumber])
         {
             //increment score if the answer is correct
             setCorrectAnswers();
@@ -188,6 +189,8 @@ public class Question
     //this method will be called in the driver class to initiate the quiz loop.  All other methods used within
     public void GetAnswer(String dialogue)
     {
+        //display questions to user and accept input
         setUserInput(Integer.parseInt(JOptionPane.showInputDialog(null, dialogue, "Java Quiz", JOptionPane.PLAIN_MESSAGE)));
+        //show user a summary of their results
     }
 }

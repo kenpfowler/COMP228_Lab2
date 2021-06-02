@@ -8,7 +8,7 @@ public class Program
         for (int i = 0; i < quiz.getQuestions().length; i++)
         {
             quiz.GetAnswer(quiz.PrepareQuestion(i));
-            quiz.TestAnswer();
+            quiz.TestAnswer(i);
             quiz.DisplayMessage();
         }
     }
