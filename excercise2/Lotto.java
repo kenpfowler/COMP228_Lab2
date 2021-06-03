@@ -1,4 +1,5 @@
 package excercise2;
+import javax.swing.*;
 import java.util.Random;
 
 /*
@@ -72,4 +73,15 @@ public void randomize()
         this._numbers[i] = randomizer.nextInt(9) + 1;
     }
 }
+
+//display feedback on win
+    public void feedbackOnWin(int result, int userEntry)
+    {
+        String message = "\n#####################################################\n";
+        message += String.format("\nThe lottery number is: %d", result);
+        message += String.format("\nYou chose the number: %d", userEntry);
+        message += "\nYOU WIN!\n";
+        message += "\n#####################################################\n";
+        JOptionPane.showMessageDialog(null, message);
+    }
 };

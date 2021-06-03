@@ -16,17 +16,13 @@ public class Program {
             //If the users entry matches the sum of lotto numbers tell them they won
         if (userEntry == LotteryGame.sumOfLotto())
         {
-            System.out.println("\n#####################################################\n");
-            System.out.printf("The lottery number is: %d", LotteryGame.sumOfLotto());
-            System.out.printf("\nYou chose the number: %d", userEntry);
-            System.out.println("\nYOU WIN!");
-            System.out.println("\n#####################################################\n");
+            LotteryGame.feedbackOnWin(LotteryGame.sumOfLotto(), userEntry);
             break;
         }
         else
         {
             //if user doesn't win, display message
-            System.out.println("\n#####################################################");
+            System.out.println("\n#####################################################\n");
             System.out.printf("\nThe lottery number was: %d", LotteryGame.sumOfLotto());
             System.out.printf("\nYou chose the number: %d", userEntry);
             //decrement plays
@@ -41,7 +37,7 @@ public class Program {
                 System.out.println("\n#####################################################\n");
             }
             //randomize lottery numbers before next play
-            LotteryGame.randomize();
+//            LotteryGame.randomize();
         }
     }
     }
