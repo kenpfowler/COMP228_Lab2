@@ -1,42 +1,13 @@
 package excercise1;
 import javax.swing.JOptionPane;
 import java.util.Random;
+import java.text.DecimalFormat;
 
 /*
-- [x] Develop a Java application that simulates a test.
-- [x] The test contains at least four questions about first three lectures of this course.
-- [x] Each question should be a multiple-choice question with 5 options.
-
- Define a Question class. Use programmer-defined methods to implement your solution. For example:
-        define a method to prepare the questions – prepareQuestion
-        define a method to test the answer – testAnswer
-        define a method to display a random message for the user – displayMessage
-        define a method to interact with the user - getAnswer
-        Display the questions using methods of JOptionPane class. Use a loop to show all the questions.
-
-For each question:
-
-        - [ ] If the user finds the right answer, display a random congratulatory message (“Excellent!”, ”Keep up the good job!”, or “Well done!”).
-        - [ ] If the user responds incorrectly, display an appropriate message, and the correct answer (“Wrong. Please try again”, “No. Keep trying..”, "No. Another attempt).
-        - [ ] Use random-number generation to choose a number from 1 to 3 that will be used to select an appropriate response to each answer.
-        - [ ] Use a switch statement to issue the responses, as in the following code:
-
-``` java
-switch ( randomObject.nextInt( 3 ) )
-
-        {
-
-        case 0:
-
-        return( "Excellent!" );
-
-        }
-        ```
-
-        - [] At the end of the test, display the number of correct and incorrect answers, and the percentage of the correct answers.
-        - [] Your main class will simply create a question object and start the test by calling getAnswer method. (5 marks)
+Issues
+Optimize to use getters and setters instead of accessing directly.
+try to refactor lines that can be encapsulated in a method
 */
-
 
 public class Question
 {
@@ -77,19 +48,27 @@ public class Question
     private boolean _isCorrect = false;
 
     //track which question the user is on
-    public int _questionNumber = 0;
+    private int _getQuestionNumber = 0;
 
-    // getter and setters
+    // get the current question number
+    public int getQuestionNumber()
+    {
+        return _getQuestionNumber;
+    }
+
+    //get the array of questions
     public String[] getQuestions()
     {
         return _questions;
     }
 
+    //get the array of answers
     public String[] getAnswers()
     {
         return _answers;
     }
 
+    //get and set the users input
     public int getUserInput()
     {
         return _userInput;
@@ -98,7 +77,9 @@ public class Question
     {
         _userInput = value;
     }
-    public int getCorrectAnswers()
+
+    //get and set the number of correct answers
+    public int getNumberOfCorrectAnswers()
     {
         return _correctAnswers;
     }
@@ -117,10 +98,10 @@ public class Question
     public String prepareQuestion()
     {
         //get the first question
-        String dialogue = getQuestions()[this._questionNumber];
+        String dialogue = getQuestions()[this.getQuestionNumber()];
 
         //get the answers
-        String[] answers = getAnswers()[this._questionNumber].split(",", 0);
+        String[] answers = getAnswers()[this.getQuestionNumber()].split(",", 0);
 
         //format each answer and add to the dialogue
         for (int i = 0; i < answers.length; i++)
@@ -138,7 +119,7 @@ public class Question
     public void testAnswer()
     {
         //compare users answer with correct answer
-        if (this.getUserInput() == this._answerKey[this._questionNumber])
+        if (this.getUserInput() == this._answerKey[this.getQuestionNumber()])
         {
             //increment score if the answer is correct
             setCorrectAnswers();
@@ -149,52 +130,48 @@ public class Question
     public void displayMessage()
     {
         Random randomizer = new Random();
-        String[] answers = getAnswers()[this._questionNumber].split(",", 0);
-        String message = answers[_answerKey[this._questionNumber] - 1];
 
         switch (randomizer.nextInt(3))
         {
             case 0:
                 if (this._isCorrect)
                 {
-                   JOptionPane.showMessageDialog(null, _isCorrectMessage[0]);
+                    displayFeedbackCorrectAnswer(0);
                 }
                 else
                 {
-
-                    JOptionPane.showMessageDialog(null, String.format("%s\nThe correct answer is: %s", _isIncorrectMessage[0], message));
-
+                    displayFeedbackIncorrectAnswer(0);
                 }
                 break;
             case 1:
                 if (this._isCorrect)
                 {
-                    JOptionPane.showMessageDialog(null, _isCorrectMessage[1]);
+                    displayFeedbackCorrectAnswer(1);
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, String.format("%s\nThe correct answer is: %s", _isIncorrectMessage[1], message));
-
+                    displayFeedbackIncorrectAnswer(1);
                 }
                 break;
             case 2:
                 if (this._isCorrect)
                 {
-                    JOptionPane.showMessageDialog(null, _isCorrectMessage[2]);
+                    displayFeedbackCorrectAnswer(2);
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, String.format("%s\nThe correct answer is: %s", _isIncorrectMessage[2], message));
-
+                    displayFeedbackIncorrectAnswer(2);
                 }
                 break;
         }
+
+        //reset flag variable and increment question number
         this._isCorrect = false;
-        this._questionNumber++;
+        this._getQuestionNumber++;
         //show user a summary of their results
-        if (this._questionNumber == (getQuestions().length))
+        if (this._getQuestionNumber == (getQuestions().length))
         {
-            JOptionPane.showMessageDialog(null, String.format("Test Over. Here are your results:\nScore: %d/%d --- %.2f%%%n",this._correctAnswers , getQuestions().length, ((float)this._correctAnswers/(float)getQuestions().length) ));
+            JOptionPane.showMessageDialog(null, String.format("Test Over. Here are your results:\nScore: %d/%d ( %s )", getNumberOfCorrectAnswers() , getQuestions().length, calculateScoreInPercent() ));
         }
     }
 
@@ -203,5 +180,27 @@ public class Question
     {
         //display questions to user and accept input
         setUserInput(Integer.parseInt(JOptionPane.showInputDialog(null, dialogue, "Java Quiz", JOptionPane.PLAIN_MESSAGE)));
+    }
+
+    //method to calculate the test score in percent
+    public String calculateScoreInPercent()
+    {
+        DecimalFormat decFormat = new DecimalFormat("#%");
+        decFormat.format((float) this.getNumberOfCorrectAnswers()/(float)getQuestions().length);
+        return decFormat.format((float) this.getNumberOfCorrectAnswers()/(float)getQuestions().length);
+
+    }
+
+    //method to give feedback for a correct answer
+    public void displayFeedbackCorrectAnswer(int num)
+    {
+        JOptionPane.showMessageDialog(null, _isCorrectMessage[num]);
+    }
+    //method to give feedback for incorrect answer
+    public void displayFeedbackIncorrectAnswer(int num)
+    {
+        String[] answers = getAnswers()[this.getQuestionNumber()].split(",", 0);
+        String message = answers[_answerKey[this.getQuestionNumber()] - 1];
+        JOptionPane.showMessageDialog(null, String.format("%s\nThe correct answer is: %s", _isIncorrectMessage[2], message));
     }
 }

@@ -9,11 +9,11 @@
 
 ### References: Learning materials for week 3, textbook, and other references (if any)
 ### Requirements Checklist
-- [ ] Each exercise should be placed in a separate package named exercise1, exercise2, etc.
+- [x] Each exercise should be placed in a separate package named exercise1, exercise2, etc.
 
 - [ ] You will have to demonstrate your solution in a scheduled lab session and submitting the code through dropbox link on eCentennial.
 
-- [ ] You must name your Eclipse project according to the following rule:
+- [x] You must name your Eclipse project according to the following rule:
   * YourFullName_COMP228Labnumber
   *  Example: JohSmith_COMP228Lab2
     
@@ -21,7 +21,7 @@
     * YourLastName_COMP228Labnumber.zip
     * Example: JohSmith_COMP228Lab2.zip
 
-- [ ] Apply the naming conventions for variables, methods, classes, and packages:
+- [x] Apply the naming conventions for variables, methods, classes, and packages:
     * variable names start with a lowercase character
     * classes start with an uppercase character
     * packages use only lowercase characters
@@ -31,21 +31,21 @@
 
 ### Exercise 1
 Develop a Java application that simulates a test. 
-The test contains at least four questions about first three lectures of this course. 
-Each question should be a multiple-choice question with 5 options.
-Define a Question class. Use programmer-defined methods to implement your solution. For example:
-define a method to prepare the questions – prepareQuestion
-define a method to test the answer – testAnswer
-define a method to display a random message for the user – displayMessage
-define a method to interact with the user - getAnswer
-Display the questions using methods of JOptionPane class. Use a loop to show all the questions.
+- [x] The test contains at least four questions about first three lectures of this course. 
+- [x] Each question should be a multiple-choice question with 5 options.
+- [x] Define a Question class. Use programmer-defined methods to implement your solution. For example:
+- [x] define a method to prepare the questions – prepareQuestion
+- [x] define a method to test the answer – testAnswer
+- [x] define a method to display a random message for the user – displayMessage
+- [x] define a method to interact with the user - getAnswer
+- [x] Display the questions using methods of JOptionPane class. Use a loop to show all the questions.
 
 For each question:
 
-- [ ] If the user finds the right answer, display a random congratulatory message (“Excellent!”, ”Keep up the good job!”, or “Well done!”).
-- [ ] If the user responds incorrectly, display an appropriate message, and the correct answer (“Wrong. Please try again”, “No. Keep trying..”, "No. Another attempt).
-- [ ] Use random-number generation to choose a number from 1 to 3 that will be used to select an appropriate response to each answer.
-- [ ] Use a switch statement to issue the responses, as in the following code:
+- [x] If the user finds the right answer, display a random congratulatory message (“Excellent!”, ”Keep up the good job!”, or “Well done!”).
+- [x] If the user responds incorrectly, display an appropriate message, and the correct answer (“Wrong. Please try again”, “No. Keep trying..”, "No. Another attempt).
+- [x] Use random-number generation to choose a number from 1 to 3 that will be used to select an appropriate response to each answer.
+- [x] Use a switch statement to issue the responses, as in the following code:
 
 ``` java
 switch ( randomObject.nextInt( 3 ) )
@@ -59,8 +59,8 @@ return( "Excellent!" );
 }
 ```
 
-At the end of the test, display the number of correct and incorrect answers, and the percentage of the correct answers.
-Your main class will simply create a question object and start the test by calling getAnswer method. (5 marks)
+- [x] At the end of the test, display the number of correct and incorrect answers, and the percentage of the correct answers.
+- [x] Your main class will simply create a question object and start the test by calling getAnswer method. (5 marks)
 
 Exercise 2
 - [x] Design a Lotto class with one array instance variable to hold three random integer values (from 1 to 9).
