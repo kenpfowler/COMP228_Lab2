@@ -1,21 +1,6 @@
 package excercise2;
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.util.Random;
-
-/*
-
-Exercise 2
-
-- [x] Design a Lotto class with one array instance variable to hold three random integer values (from 1 to 9).
-- [x] Include a constructor that randomly populates the array for a lotto object.
-- [x] Also, include a method in the class to return the array.
-- [x] Use this class to simulate a simple lotto game in which the user chooses a number between 3 and 27.
-- [x] The user runs the lotto up to 5 times and each time the sum of lotto numbers is calculated.
-- [x] If the number chosen by the user matches the sum, the user wins and the game ends.
-- [x] If the number does not match the sum within five rolls, the computer wins.
-- [x] Use methods of JOptionPane class to interact with the user. (3 marks)
-
-*/
 
 //create Lotto class
 public class Lotto {
@@ -63,6 +48,7 @@ public Lotto()
         //return that variable
         return sum;
     }
+
 //randomize lotto numbers
 public void randomize()
 {
@@ -80,8 +66,30 @@ public void randomize()
         String message = "\n#####################################################\n";
         message += String.format("\nThe lottery number is: %d", result);
         message += String.format("\nYou chose the number: %d", userEntry);
-        message += "\nYOU WIN!\n";
-        message += "\n#####################################################\n";
+        message += "\nYOU WIN!\n\n#####################################################\n";
         JOptionPane.showMessageDialog(null, message);
+    }
+
+//display feedback on loss
+    public void feedbackOnLoss(int result, int userEntry)
+    {
+        //construct message
+        String message = "\n#####################################################\n";
+        message += String.format("\nThe lottery number was: %d", result);
+        message += String.format("\nYou chose the number: %d", userEntry);
+
+        //decrement plays
+        this.setPlays();
+
+        //if user has 0 plays then computer wins
+        if (this.getPlays() == 0) {
+            message += "\nGame over, Computer wins.\n#####################################################\n";
+            //else tell them how many plays remain
+        } else {
+            message += String.format("\nYou have %d/5 plays remaining\n", this.getPlays());
+            message += "\n#####################################################\n";
+        }
+        //Show dialogue box
+        JOptionPane.showMessageDialog(null, message, "Result!", JOptionPane.PLAIN_MESSAGE);
     }
 };
