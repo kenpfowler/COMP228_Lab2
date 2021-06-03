@@ -11,13 +11,13 @@
 ### Requirements Checklist
 - [x] Each exercise should be placed in a separate package named exercise1, exercise2, etc.
 
-- [ ] You will have to demonstrate your solution in a scheduled lab session and submitting the code through dropbox link on eCentennial.
+- [x] You will have to demonstrate your solution in a scheduled lab session and submitting the code through dropbox link on eCentennial.
 
 - [x] You must name your Eclipse project according to the following rule:
   * YourFullName_COMP228Labnumber
   *  Example: JohSmith_COMP228Lab2
     
-- [ ] Submit your assignment in a zip file that is named according to the following rule:
+- [x] Submit your assignment in a zip file that is named according to the following rule:
     * YourLastName_COMP228Labnumber.zip
     * Example: JohSmith_COMP228Lab2.zip
 
