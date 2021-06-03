@@ -9,7 +9,7 @@ public class Program
         {
             quiz.GetAnswer(quiz.PrepareQuestion(i));
             quiz.TestAnswer(i);
-            quiz.DisplayMessage();
+            quiz.DisplayMessage(i);
         }
     }
 }

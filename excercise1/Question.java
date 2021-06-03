@@ -3,6 +3,8 @@ import javax.swing.JOptionPane;
 import java.util.Random;
 /*ISSUES
 - [] show user a summary of their results
+- [] show user the correct answer if wrong
+ */
 
 /*
 - [] Develop a Java application that simulates a test.
@@ -143,9 +145,11 @@ public class Question
         }
     }
 
-    public void DisplayMessage()
+    public void DisplayMessage(int questionNumber)
     {
         Random randomizer = new Random();
+        String[] answers = getAnswers()[questionNumber].split(",", 0);
+        String message = answers[_answerKey[questionNumber] - 1];
 
         switch (randomizer.nextInt(3))
         {
@@ -156,7 +160,8 @@ public class Question
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, _isIncorrectMessage[0]);
+
+                    JOptionPane.showMessageDialog(null, String.format("%s\nThe correct answer is: %s", _isIncorrectMessage[0], message));
 
                 }
                 break;
@@ -167,7 +172,7 @@ public class Question
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, _isIncorrectMessage[1]);
+                    JOptionPane.showMessageDialog(null, String.format("%s\n The correct answer is: %s", _isIncorrectMessage[1], message));
 
                 }
                 break;
@@ -178,12 +183,14 @@ public class Question
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, _isIncorrectMessage[2]);
+                    JOptionPane.showMessageDialog(null, String.format("%s\n The correct answer is: %s", _isIncorrectMessage[2], message));
 
                 }
                 break;
         }
         this._isCorrect = false;
+        //show user a summary of their results
+
     }
 
     //this method will be called in the driver class to initiate the quiz loop.  All other methods used within
@@ -191,6 +198,5 @@ public class Question
     {
         //display questions to user and accept input
         setUserInput(Integer.parseInt(JOptionPane.showInputDialog(null, dialogue, "Java Quiz", JOptionPane.PLAIN_MESSAGE)));
-        //show user a summary of their results
     }
 }
